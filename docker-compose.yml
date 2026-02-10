@@ -12,3 +12,14 @@ services:
     network_mode: service:gremlin-server
     tty: true
     stdin_open: true
+
+  app:
+    build: .
+    container_name: gremlin-app
+    ports:
+      - "3000:3000"
+    environment:
+      - GREMLIN_URL=ws://gremlin-db:8182/gremlin
+    depends_on:
+      - gremlin-server
+    restart: always
