@@ -1,0 +1,14 @@
+services:
+  gremlin-server:
+    image: tinkerpop/gremlin-server:3.8.0
+    container_name: gremlin-db
+    ports:
+      - "8182:8182"
+    restart: always
+
+  gremlin-console:
+    image: tinkerpop/gremlin-console:3.8.0
+    container_name: gremlin-console
+    network_mode: service:gremlin-server
+    tty: true
+    stdin_open: true
